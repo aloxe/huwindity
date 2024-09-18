@@ -15,6 +15,7 @@ module.exports = function(eleventyConfig) {
 
   var pathPrefix = "";
   if (process.env.GITHUB_REPOSITORY) {
+    // add repository name to path for github pages
     pathPrefix = process.env.GITHUB_REPOSITORY.split('/')[1];
   }
 
