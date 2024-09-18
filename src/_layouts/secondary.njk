@@ -2,15 +2,12 @@
 <html lang="en">
   <head>
     <!-- https://github.com/joshbuchea/HEAD -->
-
     <!-- Recommended -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <!-- Meta -->
     <meta name="description" content="{{ metadata.description }}" />
     <meta name="generator" content="{{ eleventy.generator }}" />
-
     <!-- Icons -->
     <!-- https://favicon.io/ -->
     <link
@@ -31,13 +28,25 @@
       href="{{ '/favicon-16x16.png' | url }}"
     />
     <link rel="manifest" href="{{ '/site.webmanifest' | url }}" />
-
     <title>{{ title or metadata.title }}</title>
 
-    <link rel="stylesheet" href="{{ '/styles.css' | url }}" />
-  </head>
+    <!--link rel="stylesheet" href="{{ 'secondary.css' | url }}" /-->
 
-  <body class="font-sans leading-normal tracking-normal text-gray-900">
+    <style>
+      {% set css %}
+      {% include "../_assets/css/styles.css" %}
+      {% endset %}
+      {{css | postcss | safe}}
+    </style>
+
+  </head>
+  <body class="font-mono leading-normal tracking-normal text-gray-900">
+  <p>
     {{ content | safe }}
+  </p>
+    <footer class="bg-red-200 text-center p-4 fixed bottom-0 w-full">
+  ¯\_(ツ)_/¯ made with ♥
+</footer>
+
   </body>
 </html>
