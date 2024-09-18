@@ -34,10 +34,13 @@
 
     <title>{{ title or metadata.title }}</title>
 
-    <link rel="stylesheet" href="{{ '/styles.css' | url }}" />
+    <link rel="stylesheet" href="{{ '/css/default.css' | url }}" />
   </head>
 
-  <body class="font-sans leading-normal tracking-normal text-gray-900">
-    {{ content | safe }}
+  <body class="font-sans leading-normal tracking-normal text-gray-900 flex flex-col min-h-screen">
+    <main class="flex-grow">
+      {{ content | safe }}
+      {% include "../_includes/footer.njk" %}
+    </main>
   </body>
 </html>

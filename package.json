@@ -3,10 +3,8 @@
   "version": "1.0.0",
   "description": "Simple 11ty template with tailwind",
   "scripts": {
-    "start": "run-p start",
-    "start:eleventy": "eleventy --serve",
-    "build": "run-s clean build:eleventy",
-    "build:eleventy": "cross-env ELEVENTY_PRODUCTION=true eleventy",
+    "start": "eleventy --serve",
+    "build": "cross-env ELEVENTY_PRODUCTION=true eleventy",
     "clean": "rimraf _site"
   },
   "repository": {
@@ -36,5 +34,8 @@
     "postcss-import": "^16.1.0",
     "rimraf": "^6.0.1",
     "tailwindcss": "^3.4.13"
+  },
+  "dependencies": {
+    "@fullhuman/postcss-purgecss": "^6.0.0"
   }
 }

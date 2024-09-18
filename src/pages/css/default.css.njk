@@ -1,0 +1,8 @@
+---
+permalink: /css/default.css
+---
+
+{% set css %}
+{% include "../../_assets/css/styles.css" %}
+{% endset %}
+{{css | postcss | safe}}
