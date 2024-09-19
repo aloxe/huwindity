@@ -40,6 +40,59 @@
   <body class="font-sans leading-normal tracking-normal text-gray-900 flex flex-col min-h-screen">
     <main class="flex-grow">
       {{ content | safe }}
+
+{# TODO without plugin: https://www.mikeaparicio.com/posts/2022-08-19-nested-navigation-in-eleventy/ #}
+{% macro renderNavListItem(entry) %}
+  {% set children = [] %}
+  {% set level = entry.url.split("/").length %}
+  {% set Allentries = collections.all %}
+
+  {% if level >= 2 %}
+
+    {% for menuEntry in Allentries %}
+      {% if menuEntry.url.split("/").length === level + 1 %}
+        {%  if menuEntry.url.split("/")[level-2] === entry.url.split("/")[level-2] %}
+          {% set children = (children.push(menuEntry), children) %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+    {% if children.length %}
+      <li>
+        <div>
+          <summary>
+            <a href="{{ entry.url }}"{% if entry.url == page.url %} aria-current="page" {% endif %}>{{ entry.data.title }}</a> ({{ level }})
+          </summary>
+          <ul role="list" class="container ml-5 list-disc">
+            {%- for child in children %}{{ renderNavListItem(child) }}{% endfor -%}
+          </ul>
+        </div>
+      </li>
+    {% else %}
+      <li>
+        <a href="{{ entry.url }}"{% if entry.url == page.url %} aria-current="page" {% endif %}>{{ entry.data.title }}</a> ({{ level }})
+      </li>
+    {% endif %}
+
+
+  {% else %}
+    <li>→ 
+      <a href="{{ entry.url }}"{% if entry.url == page.url %} aria-current="page" {% endif %}>{{ entry.data.title }}</a> ({{ level }})
+    </li>
+  {% endif %}
+{% endmacro %}
+
+      <h2 class="container mx-auto">Menu:</h2>
+      {% set Allentries = collections.all %}
+      <ul role="list" class="container ml-20 list-disc ">
+        {%- for entry in Allentries %}
+          {% if entry.url.split("/").length === 3 %}
+            {{ renderNavListItem(entry) }}
+          {% endif %}
+          {# <li class=""> <a href="{{ entry.url }}">→ {{ entry.data.title }} ({{entry.url.split("/").length}})</a><br/>
+          {{entry.url.split("/")}} #}
+          </li>
+        {% endfor %}
+      </ul>
       {% include "../_includes/footer.njk" %}
     </main>
   </body>
