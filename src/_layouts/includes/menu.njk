@@ -1,0 +1,18 @@
+{% from '../macros/renderNavListItem.njk' import renderNavListItem with context %}
+
+<nav class="container mx-auto">
+  {% set allEntries = collections.all %}
+  <ul role="list" class="ml-20 list-disc">
+    {%- for entry in allEntries %}
+      {% if entry.url.split("/").length === 3 %}
+        {# 
+        length may be different if the site is not directly under the domain 
+        → TODO: set length limit based on site base URL
+        Folders with pages and without index will not be listed in the menu
+        → TODO: add the documentation explaining that 11ty doesn't add folders to collections
+        #}
+        {{ renderNavListItem(entry) }}
+      {% endif %}
+    {% endfor %}
+  </ul>
+</nav>

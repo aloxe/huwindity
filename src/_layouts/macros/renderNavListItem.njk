@@ -1,0 +1,30 @@
+{% macro renderNavListItem(entry) %}
+  {% set children = [] %}
+  {% set level = entry.url.split("/").length %}
+  {% set Allentries = collections.all %}
+
+  {% for menuEntry in Allentries %}
+    {% if menuEntry.url.split("/").length === level + 1 %}
+      {%  if menuEntry.url.split("/")[level-2] === entry.url.split("/")[level-2] %}
+        {% set children = (children.push(menuEntry), children) %}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+
+  {% if children.length %}
+    <li>
+      <div>
+        <summary>
+          <a href="{{ entry.url }}"{% if entry.url == page.url %} aria-current="page" {% endif %}>{{ entry.data.title }}</a> ({{ level }})
+        </summary>
+        <ul role="list" class="container ml-5 list-disc">
+          {%- for child in children %}{{ renderNavListItem(child) }}{% endfor -%}
+        </ul>
+      </div>
+    </li>
+  {% else %}
+    <li>
+      <a href="{{ entry.url }}"{% if entry.url == page.url %} aria-current="page" {% endif %}>{{ entry.data.title }}</a>
+    </li>
+  {% endif %}
+{% endmacro %}
