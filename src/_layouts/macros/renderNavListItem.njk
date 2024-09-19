@@ -1,3 +1,21 @@
+{% macro aClass(entry) %}
+  {% if entry.url.split("/").length === 3 %}
+    block p-4 text-nowrap hover:text-blue-300
+  {% endif %}
+  {% if entry.url.split("/").length === 4 %}
+    block p-4 text-nowrap hover:underline
+  {% endif %}
+  {% if entry.url.split("/").length >= 5 %}
+    block px-4 py-0 text-sm text-nowrap hover:underline
+  {% endif %}
+{% endmacro %}
+
+{% macro ulClass(entry) %}
+  {% if entry.url.split("/").length === 3 %}
+    absolute left-0 hidden bg-white text-black shadow-lg group-hover:block
+  {% endif %}
+{% endmacro %}
+
 {% macro renderNavListItem(entry) %}
   {% set children = [] %}
   {% set level = entry.url.split("/").length %}
@@ -12,19 +30,26 @@
   {% endfor %}
 
   {% if children.length %}
-    <li>
-      <div>
+    <li class="relative group {% if entry.url.split("/").length === 4 %}hover:bg-gray-100{% endif %}">
+      <div class="">
         <summary>
-          <a href="{{ entry.url }}"{% if entry.url == page.url %} aria-current="page" {% endif %}>{{ entry.data.title }}</a> ({{ level }})
+          <a href="{{ entry.url }}" {% if entry.url == page.url %} aria-current="page"{% endif %} 
+          class="{{aClass(entry)}} 
+          {% if entry.url.split("/").length === 4 %}-mb-4{% endif %}">
+            {{ entry.data.title }}  ({{level}})
+          </a>
         </summary>
-        <ul role="list" class="container ml-5 list-disc">
+        <ul role="list" class="{{ulClass(entry)}}
+          {% if entry.url.split("/").length >= 4 %}ml-2{% endif %}">
           {%- for child in children %}{{ renderNavListItem(child) }}{% endfor -%}
         </ul>
       </div>
     </li>
   {% else %}
-    <li>
-      <a href="{{ entry.url }}"{% if entry.url == page.url %} aria-current="page" {% endif %}>{{ entry.data.title }}</a>
+    <li class="relative group {% if entry.url.split("/").length === 4 %}hover:bg-gray-100{% endif %}">
+      <a href="{{ entry.url }}"{% if entry.url == page.url %} aria-current="page" {% endif %}
+      class="{{aClass(entry)}}"
+      >{{ entry.data.title }} ({{level}})</a> 
     </li>
   {% endif %}
 {% endmacro %}
