@@ -1,9 +1,20 @@
-# windty 🌬️
+# huwindity 🌬️
 
-Windty is a basic template using 11ty and Tailwind, and deploys to github pages.
+I wanted to use [Windty](https://github.com/distantcam/windty/) for my next [eleventy](https://www.11ty.dev/) project before I realised I need more than just a single page with [Tailwindcss](https://tailwindcss.com/). So I kept the good work and am adding more.
+
+## What has been added
+- CI to deploy via FTP to any server
+- css are processed directly by 11ty
+- adding pages accessible via a navigation menu
+
+## What I plan to add
+- responsive image processor
+- better SEO metadata
+- decap CMS
+- in depth doc so I don't get lost when I get back here in 2 years
 
 ## How to use
-1. [Create a new repo from windty’s template](https://github.com/distantcam/windty/generate), or [clone this one](https://docs.github.com/en/free-pro-team@latest/github/creating-cloning-and-archiving-repositories/cloning-a-repository)
+1. [windty’s template](https://github.com/distantcam/windty/generate), or [clone this one](https://docs.github.com/en/free-pro-team@latest/github/creating-cloning-and-archiving-repositories/cloning-a-repository)
 2. Install dependencies: `npm install`
 3. Start development: `npm start`
 4. See your website at http://localhost:8080/

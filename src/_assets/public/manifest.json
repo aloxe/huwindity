@@ -1,6 +1,6 @@
 {
-    "short_name": "windty",
-    "name": "windty.org",
+    "short_name": "huwindity",
+    "name": "Huwindity starter for 11ty",
     "icons": [
       {
         "src": "favicon.ico",
