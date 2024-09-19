@@ -41,13 +41,11 @@
 
   </head>
   <body class="font-mono leading-normal tracking-normal text-gray-900">
-    <p>
+    <main class="flex-grow">
+      {% include "menu.njk" %}
       {{ content | safe }}
-    </p>
-
-    <footer class="bg-red-200 text-center p-4 fixed bottom-0 w-full">
-      made with ♥
-    </footer>
+      {% include "footer.njk" %}
+    </main>
 
   </body>
 </html>
