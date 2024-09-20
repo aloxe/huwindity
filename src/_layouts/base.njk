@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="{{ meta.language }}">
+  <head>
+    {% block head %}
+      {% include "head.njk" %}
+    {% endblock %}
+  </head>
+  <body>
+
+    {% block header %}
+      {% include "header.njk" %}
+    {% endblock %}
+
+    {% block main %}
+      <main>
+        {{ content | safe }}
+      </main>
+    {% endblock %}
+
+    {% block footer %}
+        {% include "footer.njk" %}
+    {% endblock %}
+
+  </body>
+</html>
