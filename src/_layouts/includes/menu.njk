@@ -1,8 +1,7 @@
 {% from '../macros/renderNavListItem.njk' import renderNavListItem with context %}
 
-<link rel="stylesheet" href="{{ '/css/menu.css' | url }}">
 
-<nav class="w-full bg-blue-600 text-white">
+<nav class="w-full bg-blue-600 text-white text-xl">
   {% set allEntries = collections.all %}
   <ul role="list" class="flex">
     <li class="relative group">
