@@ -4,12 +4,26 @@ const tailwind = require('tailwindcss');
 const postCss = require('postcss');
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
+const mdit = require('markdown-it')
+var mditAttrs = require('markdown-it-attrs');
+var mditHighlight = require('markdown-it-highlightjs');
 
 module.exports = function(eleventyConfig) {
 
   if (process.env.ELEVENTY_PRODUCTION) {
     eleventyConfig.addTransform("htmlmin", htmlminTransform);
   }
+
+  // markdown 
+  const mditOptions = {
+    html: true,
+    breaks: true,
+    linkify: true,
+    typographer: true,
+  }
+  const mdLib = mdit(mditOptions).use(mditHighlight, { inline: true })
+  eleventyConfig.setLibrary('md', mdLib)
+
 
   // Passthrough
   eleventyConfig.addPassthroughCopy({ "src/assets": "." });
@@ -31,7 +45,7 @@ module.exports = function(eleventyConfig) {
       data: '../_data',
       output: '_site',
     },
-    templateFormats: ['md', 'njk', 'jpg', 'gif', 'png', 'html'],
+    templateFormats: ['md', 'njk', 'jpg', 'gif', 'png', 'html']
   }
 };
 

@@ -1,3 +1,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@layer components {
+  .mkdn h2 {
+    @apply my-2 text-left text-2xl font-bold leading-tight text-indigo-800
+  }
+  .mkdn h3 {
+    @apply mt-6 text-left text-xl font-bold leading-normal text-blue-950
+  }
+  .mkdn p {
+    @apply my-4 text-xl font-light leading-6 text-slate-900
+  }
+  .mkdn code, .mkdn ul, .mkdn ol {
+    @apply text-xl
+  }
+  .mkdn a {
+    @apply text-blue-900 underline underline-offset-2 hover:no-underline
+  }
+}
+
+/* other solution for styling 
+read: https://dev.to/matthewtole/eleventy-markdown-and-tailwind-css-14f8
+*/
