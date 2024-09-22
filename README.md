@@ -4,8 +4,9 @@ I wanted to use [Windty](https://github.com/distantcam/windty/) for my next [ele
 
 ## What has been added
 - CI to deploy via FTP to any server
-- css are processed directly by 11ty
+- Tailwind css are processed directly by 11ty
 - adding navigation menu generated from pages
+- Handle markdown with style
 
 ## What I plan to add
 - responsive image processor

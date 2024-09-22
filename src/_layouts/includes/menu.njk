@@ -1,4 +1,4 @@
-{% from '../macros/renderNavListItem.njk' import renderNavListItem with context %}
+{% from '../macros/renderNavItem.njk' import renderNavItem with context %}
 
 
 <nav class="w-full bg-blue-600 text-white text-xl">
@@ -17,7 +17,7 @@
         Folders with pages and without index will not be listed in the menu
         → TODO: add the documentation explaining that 11ty doesn't add folders to collections
         #}
-        {{ renderNavListItem(entry) }}
+        {{ renderNavItem(entry) }}
       {% endif %}
     {% endfor %}
   </ul>
