@@ -16,7 +16,7 @@
   {% endif %}
 {% endmacro %}
 
-{% macro renderNavListItem(entry) %}
+{% macro renderNavItem(entry) %}
   {% set children = [] %}
   {% set level = entry.url.split("/").length %}
   {% set Allentries = collections.all %}
@@ -40,7 +40,7 @@
         </summary>
         <ul role="list" class="{{ulClass(entry)}}
           {% if entry.url.split("/").length >= 4 %}ml-2{% endif %}">
-          {%- for child in children %}{{ renderNavListItem(child) }}{% endfor -%}
+          {%- for child in children %}{{ renderNavItem(child) }}{% endfor -%}
         </ul>
       </div>
     </li>
