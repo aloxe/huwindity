@@ -10,7 +10,9 @@ templateEngineOverride: md # for when you have njk in code blocks
 ## Navigation principles
 The main navigation menu is not done using the [11ty Navigation Plugin](https://www.11ty.dev/docs/plugins/navigation/) because I wanted to make a navigation that reflects the organisation of pages without having to add `key` our any information in [Front Matter](https://www.11ty.dev/docs/data-frontmatter/).
 
-This navigation will instead look in `collections.all` and list all pages. It will show all first level pages in the main menu and all nested pages under a sub menu and so on. If you want to exclude a page from the navigation (typically the 404 page), you can just exclude it from `collections.all` with.
+This navigation will instead look in `collections.all` and list all pages. It will show all first level pages in the main menu and all nested pages under a sub menu and so on. 
+
+If you want to exclude a page from the navigation (typically the 404 page), you can just exclude it from the `collections.all`.
 
 ```
 eleventyExcludeFromCollections: true
@@ -24,7 +26,7 @@ The navigation menu can be added to the nunjunk template of your choice by just 
 ```js
 {% include "menu.njk" %}
 ```
-### menu.njk
+### first loop on collections
 
 `menu.njk` will loop on `collections.all` and parse the url of each entry. 
 
@@ -53,9 +55,9 @@ The link to the home page which has less chucks of url is hard coded at the begi
     </li>
 ```
 
-### renderNavItem.njk
+### Next loops on collections for nested pages
 
-For each entry `renderNavItem(entry)` will loop on `collections.all` to find all possible pages nested under the same entry. It will display each of them by calling itself again,
+For each entry `renderNavItem(entry)` will first look if the entry contains nested pages. If it does, it will set them as children.
 
 ```js
   {% for menuEntry in Allentries %}
@@ -66,6 +68,54 @@ For each entry `renderNavItem(entry)` will loop on `collections.all` to find all
     {% endif %}
   {% endfor %}
 ```
+
+If the entry has children it will contain a sub list where all entries will be handled, uncluding their possible subsets, by calling the macro again.
+
+```html
+  {% if children.length %}
+    <li>
+      <div>
+        <summary>
+          <a href="{{ entry.url }}">{{ entry.data.title }}</a>
+        </summary>
+        <ul role="list">
+          {%- for child in children %}{{ renderNavItem(child) }}{% endfor -%}
+        </ul>
+      </div>
+    </li>
+```
+
+Entries without children will be displayed normally.
+
+```html
+  {% else %}
+    <li class="relative group">
+      <a href="{{ entry.url }}">{{ entry.data.title }}</a> 
+    </li>
+  {% endif %}
+
+### Styling the navigation menu items as needed
+
+```
+Since the navigation menu is a list with possible sublists, it is rendered on the page the way it is styled. The styled are applied using tailwind according to their level. They are added to the list loop using smaller macros `aClass` and `ulClass`.
+
+First level entries are styled with a different colour
+
+```js
+  {% if entry.url.split("/").length === 3 %}
+    block p-4 text-nowrap hover:text-blue-300
+  {% endif %}
+```
+and their subblocks display on `hover`
+
+```js
+{% macro ulClass(entry) %}
+  {% if entry.url.split("/").length === 3 %}
+    absolute left-0 hidden bg-white text-black shadow-lg group-hover:block
+  {% endif %}
+{% endmacro %}
+```
+
 Second level entries are displayed under their parent entry in a drop down menu.
 
 ```js
@@ -74,10 +124,13 @@ Second level entries are displayed under their parent entry in a drop down menu.
   {% endif %}
 ```
 
-Following entries will display in the same drop down with just a small indentation. All this is done only using tailwind styles.
+Following entries will display in the same drop down block with only smaller font and added padding.
 
 ```js
   {% if entry.url.split("/").length >= 5 %}
     block px-4 py-0 text-sm text-nowrap hover:underline
   {% endif %}
 ```
+
+## What next?
+You may want to update the styles directly in both `menu.njk` and `renderNavItem.njk` so that it fits your needs. If you don't need such menu, just remove these two files and carry on.
