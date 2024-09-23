@@ -19,6 +19,10 @@
   .mkdn a {
     @apply text-blue-900 underline underline-offset-2 hover:no-underline
   }
+  .mkdn .note {
+    @apply text-cyan-900 bg-sky-200 border p-4 border-cyan-900 border-l-8
+    before:content-['ⓘ_Note:_'] before:font-bold
+  }
 }
 
 /* other solution for styling 

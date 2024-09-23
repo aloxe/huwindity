@@ -1,7 +1,7 @@
 {
-  "name": "windty",
-  "version": "1.0.0",
-  "description": "Simple 11ty template with tailwind",
+  "name": "huwindty",
+  "version": "0.1.0",
+  "description": "humbly upgraded 11ty template with tailwind",
   "scripts": {
     "start": "eleventy --serve",
     "build": "cross-env ELEVENTY_PRODUCTION=true eleventy",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/distantcam/windty.git"
+    "url": "https://github.com/aloxe/huwindty.git"
   },
   "keywords": [
     "eleventy",
