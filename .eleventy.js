@@ -21,9 +21,8 @@ module.exports = function(eleventyConfig) {
     linkify: true,
     typographer: true,
   }
-  const mdLib = mdit(mditOptions).use(mditHighlight, { inline: true })
+  const mdLib = mdit(mditOptions).use(mditAttrs).use(mditHighlight, { inline: true }).disable('code')
   eleventyConfig.setLibrary('md', mdLib)
-
 
   // Passthrough
   eleventyConfig.addPassthroughCopy({ "src/assets": "." });

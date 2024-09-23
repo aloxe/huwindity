@@ -3,6 +3,8 @@ title: Navigation
 subtitle: This page contains documentation about navigation.
 layout: base.njk
 ismarkdown: true
+# https://markllobrera.com/posts/eleventy-escaping-nunjucks-statements-in-markdown-code-blocks/
+templateEngineOverride: md # for when you have njk in code blocks
 ---
 
 ## Navigation principles
@@ -18,14 +20,19 @@ eleventyExcludeFromCollections: true
 
 ## How does it work?
 The navigation menu can be added to the nunjunk template of your choice by just including `menu.njk`.
-```nunjuck
+
+```js
 {% include "menu.njk" %}
 ```
 ### menu.njk
 
-`menu.njk` will loop on `collections.all` and parse the url of each entry. The first level entries are the ones wih 3 chuncks. From this point we will use the macro `renderNavItem(entry)` to display the entry in the menu. If the entry contains nested pages, the macro `renderNavItem(entry)` will handle it.
+`menu.njk` will loop on `collections.all` and parse the url of each entry. 
 
-```nunjuck
+The first level entries are the ones wih 3 chuncks (more if you has a long path). From this point we will use the macro `renderNavItem(entry)` to display the entry in the menu. 
+
+If the entry contains nested pages, the macro will handle it by loading itself again (see bellow).
+
+```js
   {% set allEntries = collections.all %}
   <ul role="list" class="flex">
     {%- for entry in allEntries %}
@@ -38,7 +45,7 @@ The navigation menu can be added to the nunjunk template of your choice by just 
 
 The link to the home page which has less chucks of url is hard coded at the begining of the navigation. This allows you the link to home with the word home or directly by adding your web site's logo.
 
-```nunjuck
+```html
     <li class="relative group">
     <a href="/" {% if entry.url == "/" %} aria-current="page" {% endif %}
       class="block p-4 text-nowrap hover:text-blue-300"
@@ -50,7 +57,7 @@ The link to the home page which has less chucks of url is hard coded at the begi
 
 For each entry `renderNavItem(entry)` will loop on `collections.all` to find all possible pages nested under the same entry. It will display each of them by calling itself again,
 
-```nunjuck
+```js
   {% for menuEntry in Allentries %}
     {% if menuEntry.url.split("/").length === level + 1 %}
       {%  if menuEntry.url.split("/")[level-2] === entry.url.split("/")[level-2] %}
@@ -60,14 +67,16 @@ For each entry `renderNavItem(entry)` will loop on `collections.all` to find all
   {% endfor %}
 ```
 Second level entries are displayed under their parent entry in a drop down menu.
-```nunjuck
+
+```js
   {% if entry.url.split("/").length === 4 %}
     block p-4 text-nowrap hover:underline
   {% endif %}
 ```
 
 Following entries will display in the same drop down with just a small indentation. All this is done only using tailwind styles.
-```nunjuck
+
+```js
   {% if entry.url.split("/").length >= 5 %}
     block px-4 py-0 text-sm text-nowrap hover:underline
   {% endif %}
