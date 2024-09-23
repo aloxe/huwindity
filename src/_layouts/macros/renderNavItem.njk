@@ -31,7 +31,7 @@
 
   {% if children.length %}
     <li class="relative group {% if entry.url.split("/").length === 4 %}hover:bg-gray-100{% endif %}">
-      <div class="">
+      <div>
         <summary>
           <a href="{{ entry.url }}" {% if entry.url == page.url %} aria-current="page"{% endif %} 
           class="{{aClass(entry)}} 

@@ -5,10 +5,10 @@
 
 @layer components {
   .mkdn h2 {
-    @apply my-2 text-left text-2xl font-bold leading-tight text-indigo-800
+    @apply mt-8 mb-6 text-left text-2xl font-bold leading-tight text-indigo-800
   }
   .mkdn h3 {
-    @apply mt-6 text-left text-xl font-bold leading-normal text-blue-950
+    @apply my-4 text-left text-xl font-bold leading-normal text-blue-950
   }
   .mkdn p {
     @apply my-4 text-xl font-light leading-6 text-slate-900
