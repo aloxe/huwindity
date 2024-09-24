@@ -64,7 +64,6 @@ function htmlminTransform(content, outputPath) {
   return content;
 }
 
-// inspired by https://zenzes.me/eleventy-integrate-postcss-and-tailwind-css/
 const postcssFilter = (cssCode, done) => {
   postCss([
     require('postcss-import'),
