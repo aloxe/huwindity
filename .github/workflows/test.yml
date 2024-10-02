@@ -1,14 +1,14 @@
 name: 'Deploy 11ty test 🛠️'
 on:
   workflow_dispatch:
-    inputs:
-      environment:
-        type: choice
-        description: 'Environment'
-        default: 'test'
-        required: true
-        options:
-        - test
+    # inputs:
+    #   environment:
+    #     type: choice
+    #     description: 'Environment'
+    #     default: 'test'
+    #     required: true
+    #     options:
+    #     - test
   push:
     branches:
       - test
