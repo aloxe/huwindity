@@ -62,8 +62,9 @@ jobs:
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       - name: Build
-        # BASE_HREF=github.event.repository.name to add the path to the site project (remove if you have a specific domain)
-        run: ${{ steps.detect-package-manager.outputs.manager }} BASE_HREF=${{ github.event.repository.name }} run build
+        # BASE_HREF=github.event.repository.name adds the project name to the path (remove if you have a specific domain)
+        # {{ github.event.repository.name }} can be replaced by another variable if you are using a different repo that github or van come from your own env variable
+        run: BASE_HREF=${{ github.event.repository.name }} ${{ steps.detect-package-manager.outputs.manager }} run build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
