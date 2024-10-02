@@ -4,15 +4,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="title" content="{{ title }}">
 <meta name="description" content="{{ description }}">
-<link rel="icon" type="image/png" href="{{ env.baseHref + 'favicon.ico' | url }}" />
-<link rel="manifest" href="{{ '/manifest.json' | url }}" />
+<link rel="icon" type="image/png" href="{{ '/favicon.ico' }}" />
+<link rel="manifest" href="{{ '/manifest.json' }}" />
 
 {% if page.fileSlug === "404" %}{% else %}
-  <link rel="canonical" href="{{ meta.url }}{{ page.data.permalink or page.url }}" />
+  <link rel="canonical" href="{{ page.data.permalink or page.url | url }}" />
 {% endif %}
 
 <title>
-  {{ title }}
+  {{ title or meta.title }}
 </title>
 {% if page.fileSlug === "404" %}{% else %}
   <meta itemprop="name" content="{{ title }}">
@@ -20,7 +20,7 @@
   {# <meta itemprop="image" content="{{ meta.url }}{% getOGImageUri page, image %}"> #}
   <meta property="og:title" content="{{ title }}">
   <meta property="og:type" content="article">
-  <meta property="og:url" content="{{ meta.url }}{{ page.data.permalink or page.url }}">
+  <meta property="og:url" content="{{ meta.url }}{{ page.data.permalink or page.url | url }}">
   <meta property="og:description" content="{{ description }}">
   <meta property="og:site_name" content="{{ meta.title }}">
   <meta property="og:locale" content="{{ meta.language }}">
@@ -32,7 +32,7 @@
   <meta name="twitter:card" content="summary_large_image">
 {% endif %}
 
-<link rel="alternate" type="application/rss+xml" title="RSS" href="{{ "feed.xml" | url }}" />
+<link rel="alternate" type="application/rss+xml" title="RSS" href="{{ "feed.xml" }}" />
 
-<link rel="stylesheet" href="{{ '/css/styles.css' | url }}">
-<link rel="stylesheet" href="{{ '/css/highlightjs.css' | url }}">
+<link rel="stylesheet" href="{{ '/css/styles.css' }}">
+<link rel="stylesheet" href="{{ '/css/highlightjs.css' }}">
