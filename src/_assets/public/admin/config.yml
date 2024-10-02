@@ -1,8 +1,16 @@
+# Sveltia CMS configuration
+
+# This is where we configure the CMS repo and its collections and fields
+# Sveltia CMS generally follows the Decap CMS configuration spec
+# Decap CMS docs: https://decapcms.org/docs/intro/
+# Sveltia CMS docs: https://github.com/sveltia/sveltia-cms#features
+
 backend:
   name: github
   repo: aloxe/huwindity # Path to your GitHub repository
-  branch: ecrire
+  branch: write
   base_url: https://my.reunionweb.org # Path to ext auth provider
+
 media_folder: "media/uploads"
 
 collections:
