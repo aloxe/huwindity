@@ -7,10 +7,10 @@ const cssnano = require('cssnano');
 const mdit = require('markdown-it')
 const mditAttrs = require('markdown-it-attrs');
 const mditHighlight = require('markdown-it-highlightjs');
-const { EleventyHtmlBasePlugin } = require("@11ty/eleventy");
 
 module.exports = async function(eleventyConfig) {
 
+  const { EleventyHtmlBasePlugin } = await import("@11ty/eleventy");
   eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
 
   if (process.env.ELEVENTY_PRODUCTION) {
