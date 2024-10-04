@@ -8,18 +8,25 @@
 backend:
   name: github
   repo: aloxe/huwindity # Path to your GitHub repository
-  branch: write
-  base_url: https://my.reunionweb.org # Path to ext auth provider
+  branch: main
+  base_url: https://auth.xn--4lj4bfp6d.eu.org # Path to ext auth provider
 
-media_folder: "media/uploads"
+media_folder: "src/static/img"
 
 collections:
   - name: "documentation" # Used in routes, e.g., /admin/collections/blog
     label: "Documentation" # Used in the UI
     folder: "src/pages/documentation" # The path to the folder where the documents are stored
     create: true # Allow users to create new documents in this collection
-    slug: "" # Filename template, e.g., YYYY-MM-DD-title.md
     fields: # The fields for each document, usually in front matter
-      - {label: "Layout", name: "layout", widget: "hidden", default: "base"}
-      - {label: "Title", name: "title", widget: "string"}
-      - {label: "subtitle", name: "subtitle", widget: "string"}
+      - label: "Layout"
+        name: "layout"
+        widget: "hidden"
+        default: "base"
+      - label: "Title"
+        name: "title"
+        widget: "string"
+      - label: "subtitle"
+        name: "subtitle"
+        widget: "string"
+
