@@ -9,7 +9,7 @@ const mditAttrs = require('markdown-it-attrs');
 const mditHighlight = require('markdown-it-highlightjs');
 const { EleventyHtmlBasePlugin } = require("@11ty/eleventy");
 
-module.exports = function(eleventyConfig) {
+module.exports = async function(eleventyConfig) {
 
   eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
 
