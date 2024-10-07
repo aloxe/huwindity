@@ -6,6 +6,7 @@ module.exports = {
         "http://localhost/index.html",
         "http://localhost/404.html"
       ],
+      staticDistDir: './_site',
       staticDirFileDiscoveryDepth: 1,
       "numberOfRuns": 1,
     },
