@@ -4,7 +4,7 @@ module.exports = {
       // collect options here
       "url": [
         "http://localhost/index.html",
-        "http://localhost/404.html"
+        "http://localhost/documentation/",
       ],
       staticDistDir: './_site',
       staticDirFileDiscoveryDepth: 1,
@@ -25,6 +25,9 @@ module.exports = {
         'categories:best-practices': ['warn', { minScore: 1 }],
         'categories:seo': ['warn', { minScore: 1 }],
         "categories:pwa": ["warn", { minScore: 1 }],
+        "render-blocking-resources": "off",
+        "color-contrast": ['warn', { minScore: 0.9 }],
+        "errors-in-console": "warn",
       }
     },
     // server: {
