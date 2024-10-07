@@ -2,9 +2,10 @@ module.exports = {
   ci: {
     collect: {
       // collect options here
-      // "url": [
-      //   "/"
-      // ],
+      "url": [
+        "http://localhost/index.html",
+        "http://localhost/404.html"
+      ],
       staticDirFileDiscoveryDepth: 1,
       "numberOfRuns": 1,
     },
