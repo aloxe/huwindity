@@ -1,9 +1,6 @@
 name: 'lighthouse 🚦'
-# on: [push]
-on:
-  push:
-    branches:
-      - test
+on: pull_request
+
 jobs:
   lighthouseci:
     runs-on: ubuntu-latest
