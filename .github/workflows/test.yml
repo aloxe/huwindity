@@ -33,7 +33,7 @@ jobs:
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
           source: "_site/*"
-          target: "domains/test.xn--4lj4bfp6d.eu.org/public_html"
+          target: ${{ secrets.PATH }}
           strip_components: 1
           rm: true
 
