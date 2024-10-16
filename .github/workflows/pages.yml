@@ -24,10 +24,13 @@ jobs:
   # Build job
   build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.x]
     steps:
-      - name: Checkout
+      - name: ⛓️ Checkout
         uses: actions/checkout@v3
-      - name: Detect package manager
+      - name: 🔍 Detect package manager
         id: detect-package-manager
         run: |
           if [ -f "${{ github.workspace }}/yarn.lock" ]; then
@@ -42,10 +45,10 @@ jobs:
             echo "Unable to determine packager manager"
             exit 1
           fi
-      - name: Setup Node
+      - name: 🪢 Setup Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version: ${{ matrix.node-version }}
           cache: ${{ steps.detect-package-manager.outputs.manager }}
       - name: Setup Pages
         uses: actions/configure-pages@v2
@@ -61,7 +64,7 @@ jobs:
             ${{ runner.os }}-eleventy-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
-      - name: Build
+      - name: 🤖 Build
         # BASE_HREF=github.event.repository.name adds the project name to the path (remove if you have a specific domain)
         # {{ github.event.repository.name }} can be replaced by another variable if you are using a different repo that github or van come from your own env variable
         run: BASE_HREF=${{ github.event.repository.name }} ${{ steps.detect-package-manager.outputs.manager }} run build
