@@ -1,6 +1,6 @@
 ---
 layout: base.njk
-title: Content Managment
+title: Content Managment System
 subtitle: Install Sveltia CMS step by step
 ismarkdown: true
 ---
@@ -56,7 +56,6 @@ The index page of your site should show the Sveltia logo a button that  reads "S
 In this starter, the CMS is already installed in the `_assets/public/admin`. You will find two files: index.html and config.yml.
 
 - The index.html is the page that will load the CMS application.
-
 - config.yml is the config file. You can update it to set the behaviour of your CMS. Before that, you will need to update the `base_url:` with the path to the cms oauth provider you just published.
 
 ```
