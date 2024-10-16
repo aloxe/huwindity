@@ -42,7 +42,7 @@ OAUTH_PROVIDER=github
 OAUTH_CLIENT_ID=CLIENT_ID
 OAUTH_CLIENT_SECRET=CLIENT_SECRET
 REDIRECT_URI=https://example.com/callback
-ORIGIN=https://example.com
+ORIGIN=https://host.example.com # do not include any path
 ```
 
 You will then have to upload everything to your server and make sure you set the document root of your server in the `public` directory. 
