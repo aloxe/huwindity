@@ -1,11 +1,11 @@
 ---
+layout: base.njk
 title: Styles
 subtitle: How to style your site with Tailwind css
-layout: base.njk
 ismarkdown: true
 ---
-
 ## Tailwind CSS
+
 Tailwind CSS is a utility-first CSS framework that allows you to write more concise and maintainable CSS code. Tailwind focuses on providing low-level utility classes that can be combined to create custom components.
 
 Tailwind CSS generates CSS code using a combination of configuration files, JavaScript, and PostCSS plugins.
@@ -14,9 +14,11 @@ Tailwind CSS generates CSS code using a combination of configuration files, Java
 
 For this starter project, CSS generation is managed by eleventy.js.
 
-In the previous starter [windty](https://github.com/distantcam/windty) css was generated with a separate run script in packages.json. The default `npm start` was triggering both 11ty and tailwind generation. The Postcss configuration was in a separate file.{.note}
+In [windty](https://github.com/distantcam/windty), the previous starter,  css was generated with a separate run script in packages.json. The default `npm start` was triggering both 11ty and tailwind generation. The Postcss configuration was in a separate file.
 
-The css generation was moved to the `eleventy.js` script. It still uses the tailwind configuration in `tailwind.config.js` but the postcss configuration is now part of `eleventy.js`.
+I moved the css generation directly to the `eleventy.js` config file. It still uses Postcss. The tailwind configuration remains in `tailwind.config.js`.
+
+Here is what processes the styles in `eleventy.js`:
 
 ```js
 const postcssFilter = (cssCode, done) => {
@@ -34,11 +36,14 @@ const postcssFilter = (cssCode, done) => {
     );
 }
 ```
+
 This configuration was inspired by the blog post [How to Integrate PostCSS and Tailwind CSS](https://zenzes.me/eleventy-integrate-postcss-and-tailwind-css/).
 
 ## Tailwind and Markdown
 
-Tailwind CSS is ideal to use in html files but markdown doesn't support tailwind snippets. For this, the blog post [Eleventy, Markdown, and Tailwind CSS](https://dev.to/matthewtole/eleventy-markdown-and-tailwind-css-14f8) proposes two solutions: _Create custom Tailwind components_ and _Add classes to the Markdown output_. The first solution was chosen:
+Tailwind CSS is ideal to use in html files, but markdown doesn't support tailwind snippets. For this, the blog post [Eleventy, Markdown, and Tailwind CSS](https://dev.to/matthewtole/eleventy-markdown-and-tailwind-css-14f8) proposes two solutions: *Create custom Tailwind components* and *add classes to the Markdown output*. The first solution was chosen that will help markdown files to focus on content.
+
+Here are the styles used by markdown pages in this starter:
 
 ```css
 @layer components {
@@ -54,6 +59,7 @@ Tailwind CSS is ideal to use in html files but markdown doesn't support tailwind
   …
 }
 ```
+
 ### Additional markdown styles
 
 In addition, the markdown-it-attrs plugins allows for additional classes to be added to the markdown output. This allows to style the note above within the same layer component.
