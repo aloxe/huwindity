@@ -16,7 +16,7 @@ For this starter project, CSS generation is managed by eleventy.js.
 
 In [windty](https://github.com/distantcam/windty), the previous starter,  css was generated with a separate run script in packages.json. The default `npm start` was triggering both 11ty and tailwind generation. The Postcss configuration was in a separate file.
 
-I moved the css generation directly to the `eleventy.js` config file. It still uses Postcss. The tailwind configuration remains in `tailwind.config.js`.
+I moved the css generation directly to the `eleventy.js` config file. It still uses Postcss. 
 
 Here is what processes the styles in `eleventy.js`:
 
@@ -39,11 +39,13 @@ const postcssFilter = (cssCode, done) => {
 
 This configuration was inspired by the blog post [How to Integrate PostCSS and Tailwind CSS](https://zenzes.me/eleventy-integrate-postcss-and-tailwind-css/).
 
+The tailwind configuration remains in `tailwind.config.js`.
+
 ## Tailwind and Markdown
 
-Tailwind CSS is ideal to use in html files, but markdown doesn't support tailwind snippets. For this, the blog post [Eleventy, Markdown, and Tailwind CSS](https://dev.to/matthewtole/eleventy-markdown-and-tailwind-css-14f8) proposes two solutions: *Create custom Tailwind components* and *add classes to the Markdown output*. The first solution was chosen that will help markdown files to focus on content.
+Tailwind CSS is ideal to use in html files, but markdown doesn't support tailwind snippets. For this, there are two solutions: *Create custom Tailwind components* and *add classes to the Markdown output*. Both are explained in detail in the blogpost [Eleventy, Markdown, and Tailwind CSS](https://dev.to/matthewtole/eleventy-markdown-and-tailwind-css-14f8) 
 
-Here are the styles used by markdown pages in this starter:
+In order to keep markdown files to focus on content I chose to implement the first one (*Create custom Tailwind components*) in this starter. Here are the styles used by markdown pages in this starter:
 
 ```css
 @layer components {
@@ -62,7 +64,7 @@ Here are the styles used by markdown pages in this starter:
 
 ### Additional markdown styles
 
-In addition, the markdown-it-attrs plugins allows for additional classes to be added to the markdown output. This allows to style the note above within the same layer component.
+In addition, the markdown-it-attrs plugins allows for additional classes to be added to the markdown output. This allows to specific styles to markdown components. As an example you can look at the note above within the same layer component.
 
 ```css
   .mkdn .note {
@@ -71,7 +73,7 @@ In addition, the markdown-it-attrs plugins allows for additional classes to be a
   }
 ```
 
-The `markdown-it-attrs` plugin is simply added to the call for the markdown parser `markdown-it` that is loaded in `eleventy.js`.
+To apply this style, the `markdown-it-attrs` plugin is simply added to the call for the markdown parser `markdown-it` that is loaded in `eleventy.js`.
 
 ```js
 const mdit = require('markdown-it')
